@@ -9,6 +9,14 @@ const displayMsg = function (message) {
     document.querySelector('.message').textContent = message;
 }
 
+const displayHiddenNum = function (txt) {
+    document.querySelector('.number').textContent = txt;
+}
+
+const displayScore = function (msg) {
+    document.querySelector('.score').textContent = msg;
+}
+
 document.querySelector('.check').addEventListener('click', function () {
 
     const guess = Number(document.querySelector('.guess').value);
@@ -19,11 +27,11 @@ document.querySelector('.check').addEventListener('click', function () {
     else if (guess === ranNum) {
         displayMsg(`Correct!!!`);
 
-        document.querySelector('.number').textContent = ranNum;
+        displayHiddenNum(ranNum);
 
         document.querySelector('body').style.backgroundColor = '#23c50e';
         score++;
-        document.querySelector('.score').textContent = score;
+        displayScore(score);
 
         if (score > highScore) {
             highScore = score;
@@ -36,11 +44,11 @@ document.querySelector('.check').addEventListener('click', function () {
 
         document.querySelector('body').style.backgroundColor = '#dd0707';
 
-        document.querySelector('.message').textContent = guess > ranNum ? `Too high!` : 'Too Low!';
+        displayMsg(guess > ranNum ? `Too high!` : 'Too Low!');
 
         score--;
 
-        document.querySelector('.score').textContent = score;
+        displayScore(score);
 
         if (score < 1) {
             displayMsg(`You Loose!!!`);
@@ -59,6 +67,6 @@ document.querySelector('.again').addEventListener('click', function () {
     document.querySelector('.guess').value = '';
     displayMsg('Start guessing...');
     document.querySelector('body').style.backgroundColor = '#222';
-    document.querySelector('.score').textContent = score;
-    document.querySelector('.number').textContent = '?';
+    displayScore(score);
+    displayHiddenNum('?');
 });
